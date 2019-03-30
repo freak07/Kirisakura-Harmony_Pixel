@@ -2020,6 +2020,7 @@ static int copy_from_read_buf(struct tty_struct *tty,
 				ldata->icanon);
 		zero_buffer(tty, read_buf_addr(ldata, tail), n);
 		smp_store_release(&ldata->read_tail, ldata->read_tail + n);
+		zero_buffer(tty, read_buf_addr(ldata, tail), n);
 		/* Turn single EOF into zero-length read */
 		if (L_EXTPROC(tty) && ldata->icanon && is_eof &&
 			(head == ldata->read_tail))
